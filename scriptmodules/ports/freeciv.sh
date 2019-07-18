@@ -11,12 +11,13 @@
 
 rp_module_id="freeciv"
 rp_module_desc="freeciv - Open Source Civilization game"
+rp_module_licence="GPL2 https://raw.githubusercontent.com/freeciv/freeciv/master/COPYING"
 rp_module_section="exp"
 rp_module_flags="!mali !x86"
 
 function depends_freeciv() {
     # Using xorg/xinit fixes issue where game couldn't get past opening menu screen.
-    getDepends xorg
+    getDepends xorg freeciv-sound-standard
 }
 
 function install_bin_freeciv() {
@@ -28,5 +29,5 @@ function configure_freeciv() {
     mkRomDir "ports"
     moveConfigDir "$home/.freeciv" "$md_conf_root/freeciv"
     moveConfigFile "$home/.freeciv-client-rc-2.4" "$md_conf_root/freeciv"
-    addPort "$md_id" "freeciv" "Freeciv" "xinit freeciv"
+    addPort "$md_id" "freeciv" "Freeciv" "xinit freeciv-sdl"
 }

@@ -1,123 +1,163 @@
+**Note** - This repository is a fork from zerojay's repository which was unmaintained. A lot of stuff is old and might not be working as intended with recent RetroPie.
+
 # RetroPie-Extra
 
-This is a collection of unofficial installation scripts for RetroPie allowing you to quickly and easily install emulators, ports and libretrocores that haven't been 
-included in RetroPie for one reason or another. These scripts can be considered experimental at best. 
+This is a **collection of unofficial installation scripts for RetroPie** allowing you to quickly and easily **install emulators, ports and libretrocores** that haven't been included in RetroPie (yet?) for one reason or another. These scripts can be considered experimental at best. Some of these scripts might overwrite their RetroPie's scripts counterparts.
 
-Those in the master branch have been tested reasonably and should work well but may have some flaws as they haven't gone through the RetroPie's watchful eyes yet. 
-Scripts that are unfinished, untested, unpolished will not be located in this repository and instead have been moved to https://github.com/zerojay/RetroPie-Extra-unstable.
+This repository contains scripts that are being worked on and scripts that might not work out-of-the-box or not at all. Use at your own risk, I am not liable for any damage caused by any of these scripts or their affiliated software.
 
-Pull requests and issue reports are accepted and encouraged as well as requests. Feel free to use the issue tracker to send me any personal requests for new scripts
-that you may have.
+Pull requests and issue reports are accepted and encouraged as well as requests. Feel free to use the issue tracker to send me any personal requests for new scripts that you may have.
 
-### Installation 
+## Installation
 
-Install the extra scripts
+The following commands clone the repo to your Raspberry Pi and then run `install-scripts.sh` to install the scripts in the `master` branch directly to the proper directories in the `RetroPie-Setup/` folder.
 
-The following clones the repo to your Pi and then the install-scripts.sh installs the scripts in the master branch directly to the proper directories in RetroPie-Setup.
-
-```
-git clone https://github.com/zerojay/RetroPie-Extra.git
+```bash
+cd ~
+git clone https://github.com/PabOu-be/RetroPie-Extra.git
 cd RetroPie-Extra/
 ./install-extras.sh
 ```
-Run the RetroPie Setup Script (the extra scripts will be in the experimental section)
+The installation script assumes that you are running it on a Raspberry Pi with the `RetroPie-Setup/` folder being stored in `/home/pi/RetroPie-Setup`. If your setup differs, just copy the scripts directly to the folder they need to be in.
+
+## Usage
+
+After installing **RetroPie-Extra**, the extra scripts will be installed directly in the **RetroPie Setup script** (generally in the experimental section), which you can run from either the command line or from the menu within Emulation Station.
 ```
-cd
-cd RetroPie-Setup
+cd ~
+cd RetroPie-Setup/
 sudo ./retropie_setup.sh
 ```
 
-This script assumes that you are running it on a Raspberry Pi with the RetroPie-Setup being stored in /home/pi/RetroPie-Setup. If your setup differs, just copy the scripts directly to the folder they need to be in.
+## Updating
 
-### Troubleshooting
+The following commands update your Raspberry Pi to the latest repo and then run `install-scripts.sh` to install the scripts in the `master` branch directly to the proper directories in the `RetroPie-Setup/` folder.
+
+```bash
+cd ~
+cd RetroPie-Extra/
+git pull origin
+./install-extras.sh
+```
+
+The installation script assumes that you are running it on a Raspberry Pi with the `RetroPie-Setup/` folder being stored in `/home/pi/RetroPie-Setup`. If your setup differs, just copy the scripts directly to the folder they need to be in.
+
+
+## Updating from zerojay's repository
+
+The following commands will remove old files from the zerojay's repository which might conflict with this one.
+
+```bash
+cd ~
+rm -rf RetroPie-Extra
+```
+
+You may now proceed with the installation of this repository (see the corresponding instructions above).
+
+
+## Troubleshooting
 
 Here are some helpful hints for getting around some possible issues that you may encounter.
 
-##### The port I installed appears to close immediately upon launching.
+### The port I installed appears to close immediately upon launching.
 
 In most cases, this is likely because the port requires external data files, especially in the case of game engines. In cases where shareware datafiles are available, the port will install them where possible. Otherwise, you will need to provide your own. The warning dialog box at the end of installation should usually tell you what files will be needed and where to place them. If you somehow don't see a dialog box after installation, you can open the script itself and look towards the bottom for the warning.
 
-Another possible case is the port uses the X11 windowing system. In some cases, I've included the X11 window system because of issues such as the game not going fullscreen, or just not functioning at all without it. In these cases, you will need to tell the system that it is okay for users other than root to use X11. You can do this by running the following command:
 
-```
-dpkg-reconfigure x11-common
-```
+## Included Software
 
-In the dialog box that comes up, you can select which users are allowed to use the X11 system. I would suggest you allow the pi user or anyone to run X11. This only needs to be done one time to fix the issue for all ports and programs that use the X11 window system. I would even suggest doing it now even if you have no intention yet of installing a port that uses X11 yet so that you do not need to deal with this issue in the future.
+### Master Branch
 
+#### Emulators
 
-### Included Software
-#### Master Branch
-##### Emulators
-- [X] - gearboy.sh - Gameboy emulator - Tested and works well.  
+- [ ] - `atari800.sh` - Atari 800/5200 emulator with additional joystick support - **5200 is tested, 800 is not.**
+- [ ] - `gearboy.sh` - Gameboy emulator - **Tested and works well.**
+- [ ] - `kat5200.sh` - Atari 8-bit/5200 emulator - **Only set up for 5200 at the moment.**
+- [ ] - `pokemini.sh` - Pokemon Mini emulator - **Tested and works well.**
 
-##### Ports
-- [X] - bermudasyndrome.sh - Bermuda Syndrome engine - Tested, runs, possibly instable.  
-- [X] - bloboats.sh - Fun physics game - Tested and works well, OpenGL game running through glshim.
-- [X] - breaker.sh - Arkanoid clone - Tested and works well.  
-- [X] - burgerspace.sh - BurgerTime clone - Tested and works well.  
-- [X] - chocolate-doom.sh - DOOM source port - Tested and works well.  
-- [X] - chromium.sh - Open Source Web Browser - Tested and works well.  
-- [X] - corsixth.sh - Theme Hospital engine clone - Tested and works well.  
-- [X] - crack-attack.sh - Tetris Attack clone - Tested and works well. Minor color issue needs to be fixed with glshim.
-- [X] - crispy-doom.sh - DOOM source port - Tested and works well.  
-- [X] - deadbeef.sh - Music and ripped game music player - Tested and works well.
-- [X] - easyrpgplayer.sh - RPG Maker 2000/2003 interpreter - Tested and works well.  
-- [X] - freeciv.sh - Civilization online clone - Tested and works well, I may soon replace it to compile latest freeciv so that players can play with newer clients.  
-- [X] - freedink.sh - Dink Smallwood engine - Tested and works well.  
-- [X] - freesynd.sh - Syndicate clone - Tested and has occasional crash issues. Save between levels to avoid losing progress.  
-- [X] - gamemaker.sh - Install the 3 gamemaker games - Tested and works well.  
-- [X] - ganbare.sh - Japanese 2D Platformer - Tested and works well, does not require Japanese to play.  
-- [X] - heboris.sh - Tetris The Grand Master clone - Tested and works well, does not include audio, user needs to provide their own soundpack.  
-- [X] - hurrican.sh - Turrican clone. - Tested and works well, minor graphics issues.  
-- [X] - iceweasel.sh - Rebranded Firefox Web Browser - Tested and works well.  
-- [X] - kaiten-patissier-cs.sh - Japanese 2D Platformer - Tested and works well, has English mode.  
-- [X] - kaiten-patissier-ura.sh - Japanese 2D Platformer - Tested and works well, has English mode.  
-- [X] - kaiten-patissier.sh - Japanese 2D Platformer - Tested and works well, has English mode.  
-- [X] - kodi-extra.sh - Kodi Media Player 16 with controller support as a separate system - Tested and works well.  
-- [X] - kweb.sh - Minimal kiosk web browser - Tested and working well generally. Media may not be working well, I need to understand it better first to say.  
-- [X] - manaplus.sh - 2D MMORPG client - Tested and works well, requires mouse.  
-- [X] - maelstrom.sh - Classic Mac Asteroids Remake - Tested and works well, button configuration screen may crash.
-- [X] - mayhem.sh - Remake of the Amiga game - Tested and works well.
-- [X] - nxengine.sh - The standalone version of the open-source clone/rewrite of Cave Story - Tested and works well.
-- [X] - pingus.sh - Lemmings clone - Tested and works well, requires mouse.  
-- [X] - rawgl.sh - Another World source port - Tested, occasionally crashes when button held when switching scenes?  
-- [X] - reminiscence.sh - Flashback engine clone - Tested and works well.   
-- [X] - retrobattle.sh - Fun retro style platform game - Tested and works well.
-- [X] - roadfighter.sh - RoadFighter clone - Tested and works well.  
-- [X] - rott.sh - Rise of the Triad source port - Tested and works well.  
-- [X] - sdl-bomber.sh - Simple Bomberman clone - Tested and works well, turn down the volume perhaps.  
-- [X] - smw-netplay.sh - Super Mario War with netplay - Tested and works well, netplay untested?  
-- [X] - sorr.sh - Streets of Rage Remake port - Tested and works well. Use fullscreen fast video mode.
-- [X] - supertuxkart.sh - Linux-themed racing game - Tested and works well, OpenGL game running through glshim.
-- [X] - tinyfugue.sh - MUD client - Tested and works well.  
-- [X] - ulmos-adventure.sh - Simple Adventure Game - Tested and works well.  
-- [X] - vorton.sh - Highway Encounter Remake in Spanish - Tested and works well.
-- [X] - warmux.sh - Worms Clone - Tested and works well. Possible issues with config files in wrong places?
-- [X] - weechat.sh - Console IRC Client - Tested and works well.
-- [X] - wizznic.sh - Puzznic clone - Tested and works well.  
+#### Libretrocores
 
-##### Supplementary
-- [X] - attract-mode.sh - Emulator Frontend - Tested and works well, not intended to completely replace EmulationStation.
-- [X] - screenshot.sh - Take screenshots remotely through SSH - Tested and works well.  
-- [X] - splashscreen-extra.sh - Install additional user-created splashscreens for RetroPie - Tested and works well.  
+- [ ] - `lr-mame2003_midway.sh` - MAME 0.78 core with Midway games optimizations.
 
-#### Future To-Do List (not ordered by priority)
-- [X] - glshim  
-- [ ] - SDLash/Xash Half-Life engine through glshim.  
-- [ ] - Beatfever Mania.  
-- [ ] - Stepmania/Frets on Fire through glshim/new OpenGL driver.  
-- [ ] - John's Shadow Warrior Port (jswp)  
+#### Ports
 
-### Hall of Fame - Scripts accepted into RetroPie-Setup
-- [X] - LXDE - LXDE Desktop
-- [X] - SimCoupe - Sam Coupe Emulator
-- [X] - Oricutron - Oric 1/Oric Atmos emulator
-- [X] - sdltrs - Radio Shack TRS-80 Model I/III/4/4P emulator
-- [X] - ti99sim - Texas Instruments 99A emulator
+- [ ] - `amphetamine.sh` - 2D Platforming Game - **Tested, runs well. Requires keyboard.**
+- [ ] - `barrage.sh` - Shooting Gallery action game - **Tested and works well, requires mouse.**
+- [ ] - `bermudasyndrome.sh` - Bermuda Syndrome engine - **Tested, runs, possibly instable.**
+- [ ] - `bloboats.sh` - Fun physics game - **Tested and works well, OpenGL game running through glshim.**
+- [ ] - `breaker.sh` - Arkanoid clone - **Tested and works well.**
+- [X] - `burgerspace.sh` - BurgerTime clone - **[20190109] Tested on rpi and works.**
+- [ ] - `chocolate-doom`.sh - DOOM source port - **Tested and works well.**
+- [ ] - `chromium.sh` - Open Source Web Browser - **Tested and works well.**
+- [X] - `corsixth.sh` - Theme Hospital engine clone - **[20190109] Tested on rpi and works.**
+- [ ] - `crack-attack.sh` - Tetris Attack clone - **Tested and works well. Minor color issue needs to be fixed with glshim.**
+- [ ] - `crispy-doom.sh` - DOOM source port - **Tested and works well.**
+- [ ] - `deadbeef.sh` - Music and ripped game music player - **Tested and works well.**
+- [ ] - `easyrpgplayer.sh` - RPG Maker 2000/2003 interpreter - **Tested and works well.**
+- [X] - `freeciv.sh` - Civilization online clone - **[20190109] Tested on rpi and works, zerojay wanted to replace it to compile latest freeciv so that players can play with newer clients.**
+- [ ] - `freedink.sh` - Dink Smallwood engine - **Tested and works well.**
+- [ ] - `freesynd.sh` - Syndicate clone - **Tested and has occasional crash issues. Save between levels to avoid losing progress.**
+- [X] - `gamemaker.sh` - Install the 3 gamemaker games - **[20190112] Tested on rpi and keyboard doesn't work.**
+- [ ] - `ganbare.sh` - Japanese 2D Platformer - **Tested and works well, does not require Japanese to play.**
+- [ ] - `hcl.sh` - Hydra Castle Labrinth - **Tested and works well.**
+- [ ] - `heboris.sh` - Tetris The Grand Master clone - **Tested and works well.  To fix sound, change settings from MIDI to MP3.**
+- [X] - `hurrican.sh` - Turrican clone. - **[20190110] Tested on rpi and menu is very slow with graphics issues making it unusable.**
+- [ ] - `iceweasel.sh` - Rebranded Firefox Web Browser - **Tested and works well.**
+- [ ] - `kaiten-patissier-cs.sh` - Japanese 2D Platformer - **Tested and works well, has English mode.**
+- [ ] - `kaiten-patissier-ura.sh` - Japanese 2D Platformer - **Tested and works well, has English mode.**
+- [ ] - `kaiten-patissier.sh` - Japanese 2D Platformer - **Tested and works well, has English mode.**
+- [ ] - `kodi-extra.sh` - Kodi Media Player 16 with controller support as a separate system - **Tested and works well.**
+- [ ] - `kweb.sh` - Minimal kiosk web browser - **Tested and working well generally. Media may not be working well, I need to understand it better first to say.**
+- [ ] - `lbreakout2.sh` - Open Source Breakout game - **Tested and working well, requires mouse.**
+- [ ] - `lgeneral.sh` - Open Source strategy game - **Tested and working well, requires mouse.**
+- [ ] - `lmarbles.sh` - Open Source Atomix game - **Tested and working well, requires mouse.**
+- [ ] - `ltris.sh` - Open Source Tetris game - **Tested and working well, requires keyboard.**
+- [ ] - `manaplus.sh` - 2D MMORPG client - **Tested and works well, requires mouse.**
+- [ ] - `maelstrom.sh` - Classic Mac Asteroids Remake - **Tested and works well, button configuration screen may crash.**
+- [ ] - `mayhem.sh` - Remake of the Amiga game - **Tested and works well.**
+- [X] - `mysticmine.sh` - from hlad : https://github.com/RetroPie/RetroPie-Setup/pull/2561 - **[20190110] Tested on rpi and works.**
+- [ ] - `netsurf.sh` - Lightweight web browser - **Tested and works well.**
+- [ ] - `nkaruga.sh` - Ikaruga demake. - **Tested and works well, requires keyboard.**
+- [X] - `nxengine.sh` - The standalone version of the open-source clone/rewrite of Cave Story - **Tested and works well.**
+- [X] - `openxcom.sh` - OpenXCOM - Open Source X-COM Engine" - **[20190110] Tested on rpi and works well.**
+- [X] - `pingus.sh` - Lemmings clone - **[20190110] Tested on rpi and works well, requires mouse.**
+- [ ] - `prboom-plus.sh` - Enhanced DOOM source port - lightly **tested, seems to work.**
+- [ ] - `rawgl.sh` - Another World source port - **Tested, occasionally crashes when button held when switching scenes?**
+- [ ] - `reminiscence.sh` - Flashback engine clone - **Tested and works well. **
+- [ ] - `retrobattle.sh` - Fun retro style platform game - **Tested and works well.**
+- [ ] - `rickyd.sh` - Rick Dangerous clone - **Tested and works well, requires keyboard.**
+- [ ] - `rockbot.sh` - Mega Man clone. **Tested and screen flickers like crazy until proper settings are applied. Check package help for more info.**
+- [ ] - `rott.sh` - Rise of the Triad source port - **Tested and works well.**
+- [X] - `sdl-bomber.sh` - Simple Bomberman clone - **[20190111] Tested on rpi and works well, turn down the volume perhaps. **
+- [ ] - `sorr.sh` - Streets of Rage Remake port - **Tested and works well. Use fullscreen fast video mode.**
+- [X] - `solarus-1.5.3.sh` - Solarus: Fan game engine based on Zelda 3 + a few fangames. Updated version from the official RetroPie. - **[20190109] Tested on rpi and works.**
+- [X] - `solarus-1.6.0.sh` - Solarus: Fan game engine based on Zelda 3 + a few fangames. Updated version from the official RetroPie. - **[20190109] Tested on rpi and does not work - I think upstream has to add support for the rpi on their new renderer (they have todo lines regarding this in the renderer code).**
+- [X] - `supertuxkart.sh` - Linux-themed racing game - **[20190112] Tested on rpi and doesn't work well. Super laggy, OpenGL game running through gl4es.**
+- [ ] - `texmaster2009.sh` - Tetris TGM clone - **Tested and works well.**
+- [ ] - `tinyfugue.sh` - MUD client - **Tested and works well.**
+- [ ] - `ulmos-adventure.sh` - Simple Adventure Game - **Tested and works well.**
+- [ ] - `vgmplay.sh` - Music Player - **Tested and works well. Plays .vgm and .vgz game music rips. Command line client only.**
+- [ ] - `vorton.sh` - Highway Encounter Remake in Spanish - **Tested and works well.**
+- [X] - `warmux.sh` - Worms Clone - **[20190112] Tested on rpi and works well. Possible issues with config files in wrong places?**
+- [ ] - `weechat.sh` - Console IRC Client - **Tested and works well.**
+- [ ] - `wizznic.sh` - Puzznic clone - **Tested and works well.**
+- [ ] - `zeldansq.sh` - Zelda: Navi's Quest fangame - **Tested and works well.**
+- [ ] - `zeldapicross.sh` - Zelda themed Picross fangame - **Tested and works well, may require keyboard.**
 
-### Contact Info/Additional Information
-Twitter: @zerojay - often posting new information and additions from the repository to the #retropie hashtag.  
-IRC: zerojay on irc.freenode.net, #retropie/#retropie-extra.
+#### Supplementary
 
-If you wish to be up-to-date about all the changes happening to the repository as they happen, feel free to join the #retropie-extra channel on Freenode.
+- [ ] - `fun-facts-splashscreens.sh` - Set up some loading splashscreens with fun facts.
+- [ ] - `joystick-selection.sh` - Set controllers for RetroArch players 1-4.
+- [ ] - `screenshot.sh` - Take screenshots remotely through SSH - **Tested and works well.**
+
+### Future To-Do List
+
+Have a look at the [TODO.md](/TODO.md) file.
+
+## Hall of Fame - Scripts accepted into RetroPie-Setup
+
+- nothing yet.
+
+## Contact Info / Additional Information
+
+- **Email**: pabou@pabou.com

@@ -16,7 +16,7 @@ rp_module_section="exp"
 rp_module_flags="!mali"
 
 function depends_hurrican() {
-    local depends=(subversion libsdl-image1.2-dev libmodplug-dev bc)
+    local depends=(subversion libsdl-image1.2-dev libmodplug-dev bc libgles2-mesa-dev)
     if [[ "$__raspbian_ver" -lt 8 ]]; then
         depends+=(libsdl1.2-dev libsdl-mixer1.2-dev)
     else
@@ -29,7 +29,7 @@ function sources_hurrican() {
     svn checkout svn://svn.code.sf.net/p/hurrican/code/trunk "$md_build"
     if isPlatform "rpi"; then
         sed -i 's/-I\/opt\/vc\/include\/interface\/vcos\/pthreads/-I\/opt\/vc\/include\/interface\/vcos\/pthreads -I\/opt\/vc\/include\/interface\/vmcs_host\/linux/' "$md_build/Hurrican/src/Makefile"
-        sed -i 's/-L\/opt\/vc\/lib -g -lmodplug -lSDL_mixer -lSDL_image -lSDL -lGLESv2/-L\/opt\/vc\/lib -g -lmodplug -lSDL_mixer -lSDL_image -lSDL -lGLESv2 -lbcm_host -lEGL/' "$md_build/Hurrican/src/Makefile"
+        sed -i 's/-L\/opt\/vc\/lib -g -lmodplug -lSDL_mixer -lSDL_image -lSDL -lGLESv2/-L\/opt\/vc\/lib -g -lmodplug -lSDL_mixer -lSDL_image -lSDL -lbrcmGLESv2 -lbcm_host -lbrcmEGL/' "$md_build/Hurrican/src/Makefile"
     fi
 }
 
@@ -74,4 +74,12 @@ function configure_hurrican() {
 
     mkRomDir "ports"
     moveConfigDir "$home/.hurrican" "$md_conf_root/hurrican"
+    touch "$md_inst/Hurrican.cfg"
+    touch "$md_inst/Hurrican.hsl"
+    touch "$md_inst/Game_Log.txt"
+    touch "$md_inst/Savegame0.sav"
+    chown pi:pi "$md_inst/Hurrican.cfg"
+    chown pi:pi "$md_inst/Hurrican.hsl"
+    chown pi:pi "$md_inst/Game_Log.txt"
+    chown pi:pi "$md_inst/Savegame0.sav"
 }
